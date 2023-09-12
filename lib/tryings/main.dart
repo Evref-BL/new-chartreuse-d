@@ -2,9 +2,9 @@ import 'package:analyzer/dart/analysis/analysis_context.dart';
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/analysis/session.dart';
-import 'package:chartreuse_d/tryings/dart-visitors/myASTVisitor.dart';
-import 'package:chartreuse_d/tryings/singletons/NodesChain.dart';
-import 'package:chartreuse_d/tryings/singletons/nodeOccurences.dart';
+import 'package:chartreuse_d/tryings/dart-visitors/my_ast_visitor.dart';
+import 'package:chartreuse_d/tryings/singletons/node_chain.dart';
+import 'package:chartreuse_d/tryings/singletons/node_occurences.dart';
 
 import 'dart:io';
 
@@ -17,8 +17,8 @@ Future<void> main() async {
 
   List<String> includedPaths = <String>[
     '/Users/nicolashlad/Development/Projects/pokecard-tcg/lib',
-    '/Users/nicolashlad/Development/Projects/anim-search-vanilla/lib',
-    '/Users/nicolashlad/Development/Projects/tv-randshow/lib'
+    // '/Users/nicolashlad/Development/Projects/anim-search-vanilla/lib',
+    // '/Users/nicolashlad/Development/Projects/tv-randshow/lib'
   ];
   AnalysisContextCollection collection =
       AnalysisContextCollection(includedPaths: includedPaths);
@@ -26,10 +26,12 @@ Future<void> main() async {
   await analyzeAllFiles(collection);
 
   writeStringToFile(SingletonOccurrences.toCsv(),
-      '/Users/nicolashlad/Development/parsingoccurrence.csv');
+      '/Users/nicolashlad/Development/DartAnalyserProjets/parsingoccurrence.csv');
 
   writeStringToFile(SingletonNodesChain.toMermaid(),
-      '/Users/nicolashlad/Development/markov.txt');
+      '/Users/nicolashlad/Development/DartAnalyserProjets/markovGraph.txt');
+  writeStringToFile(SingletonNodesChain.toCsv(),
+      '/Users/nicolashlad/Development/DartAnalyserProjets/markovGraph.csv');
 }
 
 Future<void> writeStringToFile(String content, String filePath) async {

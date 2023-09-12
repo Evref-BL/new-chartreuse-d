@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
-import 'package:chartreuse_d/tryings/singletons/nodeOccurences.dart';
-import 'package:chartreuse_d/tryings/singletons/nodesChain.dart';
+import 'package:chartreuse_d/tryings/singletons/node_occurences.dart';
+import 'package:chartreuse_d/tryings/singletons/node_chain.dart';
 
 String removeSuffix(String input, String suffixToRemove) {
   if (input.endsWith(suffixToRemove)) {
@@ -36,11 +36,12 @@ class ASTVisitor extends GeneralizingAstVisitor<void> {
 
   void _fillChain(dynamic node) {
     var name = resolveName(node);
-    String link = '$last --> $name';
+    String link = '$last-->$name';
+    List<dynamic> table = [];
     if (_markov.containsKey(link)) {
-      _markov[link] = _markov[link]! + 1;
+      _markov[link][2] = _markov[link]![2] + 1;
     } else {
-      _markov[link] = 1;
+      _markov[link] = [last, name, 1];
     }
   }
 

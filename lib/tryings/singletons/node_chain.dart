@@ -17,11 +17,11 @@ class SingletonNodesChain {
     final buffer = StringBuffer();
 
     // Header row
-    buffer.write('Node,Value\n');
+    buffer.write('From,To,Occurrence\n');
 
     // Iterate through the map and append key-value pairs
     _instance.forEach((key, value) {
-      buffer.write('$key,$value\n');
+      buffer.write('${value[0]},${value[1]},${value[2]}\n');
     });
 
     return buffer.toString();
@@ -35,8 +35,7 @@ class SingletonNodesChain {
 
     // Iterate through the map and append key-value pairs
     _instance.forEach((key, value) {
-      var fromto = key.split("-->");
-      buffer.write('\t${fromto[0]} -- $value --> ${fromto[1]}\n');
+      buffer.write('\t${value[0]} -- ${value[2]} --> ${value[1]}\n');
     });
 
     return buffer.toString();
